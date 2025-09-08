@@ -1,0 +1,5 @@
+# Ignore build artifact
+myapp.war
+
+# Ignore Vagrant files
+.vagrant/
