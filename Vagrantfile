@@ -63,7 +63,8 @@ end
     rmq01.vm.box_version = "9.0.43"
     rmq01.vm.hostname = "rmq01"
     rmq01.vm.network "private_network", ip: "192.168.56.11"
-    rmq01.vm.provision "shell", path: "rmq01.sh"
+    #rmq01.vm.provision "shell", path: "rmq01.sh"
+    rmq01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
     rmq01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
@@ -73,14 +74,24 @@ end
   config.vm.define "web01" do |web01|
     web01.vm.box = "ubuntu/jammy64"
     web01.vm.hostname = "web01"
-    web01.vm.provision "shell", path: "web01.sh"
+    #web01.vm.provision "shell", path: "web01.sh"
+    web01.vm.provision "shell", path: "nagios_nrpe_ubuntu_clint.sh"
     web01.vm.network "private_network", ip: "192.168.56.10"
     web01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
 
-
+  config.vm.define "nagios" do |nagios|
+    nagios.vm.box = "eurolinux-vagrant/centos-stream-9"
+    nagios.vm.box_version = "9.0.43"  
+    nagios.vm.hostname = "nagios"
+    nagios.vm.provision "shell", path: "prov_nagios.sh"
+    nagios.vm.network "private_network", ip: "192.168.56.16"
+    nagios.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+  end
 
 
 end
