@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     app01.vm.box_version = "9.0.43"
     app01.vm.hostname = "app01"
     app01.vm.network "private_network", ip: "192.168.56.15"
-    app01.vm.provision "shell", path: "app01.sh"
+    #app01.vm.provision "shell", path: "app01.sh"
     app01.vm.provider "virtualbox" do |vb|
       vb.memory = "6144"
    end
@@ -37,7 +37,7 @@ config.vm.define "db01" do |db01|
   db01.vm.box = "eurolinux-vagrant/centos-stream-9"
   db01.vm.box_version = "9.0.43"
   db01.vm.hostname = "db01"
-  db01.vm.provision "shell", path: "db01.sh"
+  #db01.vm.provision "shell", path: "db01.sh"
   db01.vm.network "private_network", ip: "192.168.56.14"
   db01.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
@@ -51,7 +51,8 @@ end
     mc01.vm.box_version = "9.0.43"
     mc01.vm.hostname = "mc01"
     mc01.vm.network "private_network", ip: "192.168.56.12"
-    mc01.vm.provision "shell", path: "mc01.sh"
+    #mc01.vm.provision "shell", path: "mc01.sh"
+    mc01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
     mc01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
