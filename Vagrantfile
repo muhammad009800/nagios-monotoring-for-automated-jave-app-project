@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     app01.vm.box_version = "9.0.43"
     app01.vm.hostname = "app01"
     app01.vm.network "private_network", ip: "192.168.56.15"
-    #app01.vm.provision "shell", path: "app01.sh"
+    app01.vm.provision "shell", path: "app01.sh"
     app01.vm.provider "virtualbox" do |vb|
       vb.memory = "6144"
    end
@@ -51,7 +51,7 @@ end
     mc01.vm.box_version = "9.0.43"
     mc01.vm.hostname = "mc01"
     mc01.vm.network "private_network", ip: "192.168.56.12"
-    #mc01.vm.provision "shell", path: "mc01.sh"
+    mc01.vm.provision "shell", path: "mc01.sh"
     mc01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
     mc01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -64,7 +64,7 @@ end
     rmq01.vm.box_version = "9.0.43"
     rmq01.vm.hostname = "rmq01"
     rmq01.vm.network "private_network", ip: "192.168.56.11"
-    #rmq01.vm.provision "shell", path: "rmq01.sh"
+    rmq01.vm.provision "shell", path: "rmq01.sh"
     rmq01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
     rmq01.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
@@ -75,7 +75,7 @@ end
   config.vm.define "web01" do |web01|
     web01.vm.box = "ubuntu/jammy64"
     web01.vm.hostname = "web01"
-    #web01.vm.provision "shell", path: "web01.sh"
+    web01.vm.provision "shell", path: "web01.sh"
     web01.vm.provision "shell", path: "nagios_nrpe_ubuntu_clint.sh"
     web01.vm.network "private_network", ip: "192.168.56.10"
     web01.vm.provider "virtualbox" do |vb|
@@ -94,18 +94,7 @@ end
       vb.memory = "1024"
     end
   end
-  ### test vm  ####
-  config.vm.define "test" do |test|
-    test.vm.box = "eurolinux-vagrant/centos-stream-9"
-    test.vm.box_version = "9.0.43"  
-    test.vm.hostname = "test"
-    test.vm.provision "shell", path: "nagios.sh"
-    test.vm.network "private_network", ip: "192.168.56.16"
-    test.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__auto: true, rsync__args: ["--verbose", "--archive", "--compress"]
-    test.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-    end
-  end
+
 
 end
 
