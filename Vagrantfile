@@ -5,20 +5,16 @@ Vagrant.configure("2") do |config|
   config.vbguest.auto_update = false
 
 
-
-
-
-
 ### build atrifact vm  ####
-  config.vm.define "mavin" do |mavin|
-    mavin.vm.box = "ubuntu/jammy64"
-    mavin.vm.hostname = "mavin"
-    mavin.vm.provision "shell", path: "maven.sh"
-    mavin.vm.network "private_network", ip: "192.168.56.13"
-    mavin.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
-    end
-  end
+  #config.vm.define "mavin" do |mavin|
+    #mavin.vm.box = "ubuntu/jammy64"
+    #mavin.vm.hostname = "mavin"
+    #mavin.vm.provision "shell", path: "maven.sh"
+    #mavin.vm.network "private_network", ip: "192.168.56.13"
+    #mavin.vm.provider "virtualbox" do |vb|
+      #vb.memory = "1024"
+    #end
+  #end
 
 
 ### tomcat vm  ####
@@ -28,6 +24,7 @@ Vagrant.configure("2") do |config|
     app01.vm.hostname = "app01"
     app01.vm.network "private_network", ip: "192.168.56.15"
     app01.vm.provision "shell", path: "app01.sh"
+    app01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
     app01.vm.provider "virtualbox" do |vb|
       vb.memory = "6144"
    end
@@ -37,7 +34,8 @@ config.vm.define "db01" do |db01|
   db01.vm.box = "eurolinux-vagrant/centos-stream-9"
   db01.vm.box_version = "9.0.43"
   db01.vm.hostname = "db01"
-  #db01.vm.provision "shell", path: "db01.sh"
+  db01.vm.provision "shell", path: "db01.sh"
+  db01.vm.provision "shell", path: "nagios_nrpe_centos_clint.sh"
   db01.vm.network "private_network", ip: "192.168.56.14"
   db01.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"

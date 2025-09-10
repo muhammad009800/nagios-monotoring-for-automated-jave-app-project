@@ -91,7 +91,10 @@ sudo systemctl enable --now tomcat
 
 
 echo "=========== enable firewall ==============="
-sudo bash /vagrant/en_firwall_tomcat.sh
+sudo dnf install -y firewalld
+sudo systemctl enable --now firewalld
+sudo firewall-cmd --get-active-zones
+sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
 echo "=========== check listening ==============="
 
 if sudo ss -tulnp | grep -q 8080; then

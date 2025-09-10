@@ -1,3 +1,5 @@
+sudo -i
+dnf install -y firewalld
 systemctl start firewalld
 systemctl enable firewalld
 firewall-cmd --get-active-zones

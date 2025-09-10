@@ -28,5 +28,11 @@ sudo rabbitmqctl set_user_tags test administrator
 sudo systemctl restart rabbitmq-server
 
 echo "=========== Starting the firewall and allowing the port 5672 to access rabbitmq ==============="
-sudo bash /vagrant/en_firwall_rmq.sh
+sudo dnf install -y firewalld
+sudo systemctl enable --now firwalld
+sudo firewall-cmd --add-port=5672/tcp
+sudo firewall-cmd --runtime-to-permanent
+sudo systemctl start rabbitmq-server
+sudo systemctl enable rabbitmq-server
+sudo systemctl status rabbitmq-server
 echo "rabbitmq is ready to use 😎👌"

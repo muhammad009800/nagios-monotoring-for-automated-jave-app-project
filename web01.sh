@@ -18,5 +18,14 @@ sudo ln -sf /etc/nginx/sites-available/vproapp /etc/nginx/sites-enabled/vproapp
 echo "======= Testing Nginx configuration ======="
 sudo nginx -t
 sudo systemctl enable --now nginx
+sudo systemctl restart nginx
+
+echo "=======firewall setup for nginx ======="
+sudo apt install -y ufw
+sudo ufw enable
+sudo ufw allow 'Nginx Full'
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
 
 echo "======= Nginx setup done 😎👌======="

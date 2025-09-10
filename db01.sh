@@ -56,7 +56,13 @@ sudo systemctl restart mariadb
 
 
 echo "==== Configuring firewall ===="
-sudo bash /vagrant/en_firwall_db.sh
+sudo dnf install -y firewalld
+sudo systemctl start firewalld
+sudo systemctl enable firewalld
+sudo firewall-cmd --get-active-zones
+sudo firewall-cmd --zone=public --add-port=3306/tcp --permanent
+sudo firewall-cmd --reload
+sudo systemctl restart mariadb
 
 echo "==== Provisioning DB DONE ✅😎👌 ===="
 

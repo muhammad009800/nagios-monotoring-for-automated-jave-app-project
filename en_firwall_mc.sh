@@ -1,3 +1,5 @@
+sudo -i
+sudo dnf install -y firewalld
 sudo systemctl enable --now firewalld
 sudo firewall-cmd --add-port=11211/tcp
 sudo firewall-cmd --runtime-to-permanent

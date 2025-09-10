@@ -1,8 +1,8 @@
 sudo -i
-dnf install -y firewalld
-systemctl enable --now firewalld
-firewall-cmd --zone=public --add-port=80/tcp
-firewall-cmd --zone=public --add-port=80/tcp --permanent
-firewall-cmd --zone=public --add-port=5666/tcp
-firewall-cmd --zone=public --add-port=5666/tcp --permanent
-firewall-cmd --reload
+sudo dnf install -y firewalld
+sudo firewall-cmd --zone=public --add-port=80/tcp
+sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=5666/tcp
+sudo firewall-cmd --zone=public --add-port=5666/tcp --permanent
+sudo firewall-cmd --reload
+sudo systemctl enable --now firewalld
