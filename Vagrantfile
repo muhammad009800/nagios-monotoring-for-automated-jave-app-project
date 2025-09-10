@@ -82,18 +82,30 @@ end
       vb.memory = "1024"
     end
   end
-
+  ### nagios vm  ####
   config.vm.define "nagios" do |nagios|
     nagios.vm.box = "eurolinux-vagrant/centos-stream-9"
     nagios.vm.box_version = "9.0.43"  
     nagios.vm.hostname = "nagios"
-    nagios.vm.provision "shell", path: "prov_nagios.sh"
+    nagios.vm.provision "shell", path: "nagios.sh" 
     nagios.vm.network "private_network", ip: "192.168.56.16"
+    nagios.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__auto: true, rsync__args: ["--verbose", "--archive", "--compress"]
     nagios.vm.provider "virtualbox" do |vb|
       vb.memory = "1024"
     end
   end
-
+  ### test vm  ####
+  config.vm.define "test" do |test|
+    test.vm.box = "eurolinux-vagrant/centos-stream-9"
+    test.vm.box_version = "9.0.43"  
+    test.vm.hostname = "test"
+    test.vm.provision "shell", path: "nagios.sh"
+    test.vm.network "private_network", ip: "192.168.56.16"
+    test.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__auto: true, rsync__args: ["--verbose", "--archive", "--compress"]
+    test.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+  end
 
 end
 
