@@ -111,8 +111,8 @@ cd /tmp
 wget https://github.com/NagiosEnterprises/nrpe/releases/download/nrpe-4.1.0/nrpe-4.1.0.tar.gz
 tar xzf nrpe-4.1.0.tar.gz
 cd nrpe-4.1.0
-make check_nrpe
 ./configure --prefix=/usr/local/nagios --enable-command-args
+make check_nrpe
 sudo cp src/check_nrpe /usr/local/nagios/libexec/
 
 
