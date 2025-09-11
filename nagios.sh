@@ -49,12 +49,13 @@ echo "====================================="
 echo "Setting up firewall"
 echo "====================================="
 dnf install -y firewalld
+systemctl enable --now firewalld
+
 firewall-cmd --zone=public --add-port=80/tcp
 firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --zone=public --add-port=5666/tcp
 firewall-cmd --zone=public --add-port=5666/tcp --permanent
 firewall-cmd --reload
-systemctl enable --now firewalld
 echo "====================================="
 echo "Creating Nagios systemd service if not exists"
 echo "====================================="
